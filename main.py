@@ -24,7 +24,7 @@ delta = 0.85
 mp_layers = 10
 mp_channels = 64
 mlp_hidden = [16]
-learning_rate = 5e-5
+learning_rate = 1e-4
 epochs = 2000
 
 # Load dataset
