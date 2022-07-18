@@ -1,10 +1,9 @@
 import numpy as np
 from munkres import Munkres
 from sklearn import metrics
-from sklearn.metrics.cluster import normalized_mutual_info_score, homogeneity_score, completeness_score
+from sklearn.metrics.cluster import normalized_mutual_info_score
 
 
-# similar to https://github.com/karenlatong/AGC-master/blob/master/metrics.py
 def cluster_acc(y_true, y_pred):
     y_true = y_true - np.min(y_true)
 
@@ -53,20 +52,11 @@ def cluster_acc(y_true, y_pred):
         new_predict[ai] = c
 
     acc = metrics.accuracy_score(y_true, new_predict)
-    f1_macro = metrics.f1_score(y_true, new_predict, average="macro")
-    # precision_macro = metrics.precision_score(y_true, new_predict, average="macro")
-    # recall_macro = metrics.recall_score(y_true, new_predict, average="macro")
-    f1_micro = metrics.f1_score(y_true, new_predict, average="micro")
-    # precision_micro = metrics.precision_score(y_true, new_predict, average="micro")
-    # recall_micro = metrics.recall_score(y_true, new_predict, average="micro")
-    return acc, f1_macro, f1_micro
+    return acc
 
 
 def eval_metrics(y_true, y_pred):
-    acc, f1_macro, f1_micro = cluster_acc(y_true, y_pred)
+    acc = cluster_acc(y_true, y_pred)
     nmi = normalized_mutual_info_score(y_true, y_pred)
-    ari = metrics.adjusted_rand_score(y_true, y_pred)
-    hs = homogeneity_score(y_true, y_pred)
-    cs = completeness_score(y_true, y_pred)
 
-    return acc, f1_macro, f1_micro, ari, hs, cs, nmi
+    return acc, nmi

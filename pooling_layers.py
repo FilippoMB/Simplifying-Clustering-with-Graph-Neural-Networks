@@ -5,12 +5,11 @@ from tensorflow.keras.layers import Dense
 
 from spektral.layers import ops
 from spektral.layers.pooling.src import SRCPool
-from spektral.layers.pooling import MinCutPool
 
 
-class BasePool(SRCPool):
+class JustBalancePool(SRCPool):
     """
-    Placeholder
+    JustBalancePool layer
     """
 
     def __init__(self,
@@ -70,6 +69,8 @@ class BasePool(SRCPool):
         if mask is not None:
             s *= mask[0]
 
+        self.add_loss(self.balance_loss(s))
+
         return s
 
     def reduce(self, x, s, **kwargs):
@@ -101,65 +102,6 @@ class BasePool(SRCPool):
         base_config = super().get_config()
         return {**base_config, **config}
 
-
-
-
-
-class JustBalance(BasePool):
-
-    def __init__(self,
-                 k,
-                 mlp_hidden=None,
-                 mlp_activation="relu",
-                 return_selection=False,
-                 use_bias=True,
-                 softmax_temperature=1.0,
-                 kernel_initializer="glorot_uniform",
-                 bias_initializer="zeros",
-                 kernel_regularizer=None,
-                 bias_regularizer=None,
-                 kernel_constraint=None,
-                 bias_constraint=None,
-                 **kwargs
-                 ):
-        super().__init__(
-            k=k,
-            mlp_hidden=mlp_hidden,
-            mlp_activation=mlp_activation,
-            return_selection=return_selection,
-            use_bias=use_bias,
-            softmax_temperature=softmax_temperature,
-            kernel_initializer=kernel_initializer,
-            bias_initializer=bias_initializer,
-            kernel_regularizer=kernel_regularizer,
-            bias_regularizer=bias_regularizer,
-            kernel_constraint=kernel_constraint,
-            bias_constraint=bias_constraint,
-            **kwargs
-        )
-
-    def select(self, x, a, i, mask=None):
-        s = self.mlp(x)
-        if mask is not None:
-            s *= mask[0]
-
-        # Balance loss
-        self.add_loss(self.balance_loss(s))
-
-        return s
-
-    # def balance_loss(self, s):
-    #     # Orthogonality regularization
-    #     ss = ops.modal_dot(s, s, transpose_a=True)
-    #     I_s = tf.eye(self.k, dtype=ss.dtype)
-    #     ortho_loss = tf.norm(
-    #         ss / tf.norm(ss, axis=(-1, -2), keepdims=True) - I_s / tf.norm(I_s),
-    #         axis=(-1, -2),
-    #     )
-    #     ortho_loss /= tf.math.sqrt(2*(1 - 1/tf.math.sqrt(float(self.k)))) # Standardize to range [0, 1]
-
-    #     return ortho_loss
-
     def balance_loss(self, s, normalized=False):
         ss = ops.modal_dot(s, s, transpose_a=True)
         loss = -tf.linalg.trace(tf.math.sqrt(ss))
@@ -168,15 +110,4 @@ class JustBalance(BasePool):
             n = float(tf.shape(s, out_type=tf.int32)[-2])
             c = float(tf.shape(s, out_type=tf.int32)[-1])
             loss = loss / tf.math.sqrt(n * c)
-        return loss
-
-
-class MinCutPool_custom(MinCutPool):
-
-    def orthogonality_loss(self, s):
-        ss = ops.modal_dot(s, s, transpose_a=True)
-        loss = -tf.linalg.trace(tf.math.sqrt(ss))
-        n = float(tf.shape(s, out_type=tf.int32)[-2])
-        c = float(tf.shape(s, out_type=tf.int32)[-1])
-        loss = loss / tf.math.sqrt(n * c)
         return loss
