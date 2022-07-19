@@ -57,7 +57,9 @@ def _preprocess_features(features):
 
 class DBLP(Dataset):
     """
-    Placeholder
+    A subset of the DBLP computer science bibliography website, 
+    as collected in the "MAGNN: Metapath Aggregated Graph Neural Network 
+    for Heterogeneous Graph Embedding" paper.
     """
     def __init__(self, normalize_x = False, dtype=np.float32, **kwargs):
         self.dtype = dtype

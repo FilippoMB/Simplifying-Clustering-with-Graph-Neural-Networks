@@ -16,6 +16,7 @@ class JustBalancePool(SRCPool):
                  k,
                  mlp_hidden=None,
                  mlp_activation="relu",
+                 normalized_loss=False,
                  return_selection=False,
                  use_bias=True,
                  kernel_initializer="glorot_uniform",
@@ -40,6 +41,7 @@ class JustBalancePool(SRCPool):
         self.k = k
         self.mlp_hidden = mlp_hidden if mlp_hidden else []
         self.mlp_activation = mlp_activation
+        self.normalized_loss = normalized_loss
 
     def build(self, input_shape):
         layer_kwargs = dict(
@@ -102,11 +104,11 @@ class JustBalancePool(SRCPool):
         base_config = super().get_config()
         return {**base_config, **config}
 
-    def balance_loss(self, s, normalized=False):
+    def balance_loss(self, s):
         ss = ops.modal_dot(s, s, transpose_a=True)
         loss = -tf.linalg.trace(tf.math.sqrt(ss))
 
-        if normalized:
+        if self.normalized_loss:
             n = float(tf.shape(s, out_type=tf.int32)[-2])
             c = float(tf.shape(s, out_type=tf.int32)[-1])
             loss = loss / tf.math.sqrt(n * c)
