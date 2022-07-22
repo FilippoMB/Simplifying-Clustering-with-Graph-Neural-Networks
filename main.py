@@ -3,20 +3,19 @@ from tqdm import tqdm
 import numpy as np
 import scipy.sparse as sp
 import matplotlib.pyplot as plt
+from sklearn.metrics.cluster import normalized_mutual_info_score
+
 import tensorflow as tf
 from tensorflow.keras.layers import Input
 from tensorflow.keras.models import Model
 
 from spektral.utils.sparse import sp_matrix_to_sp_tensor
-from spektral.datasets.citation import Citation
+from spektral.datasets import Citation, DBLP
 from spektral.utils.convolution import normalized_laplacian
 from spektral.layers import GCNConv
+from spektral.layers.pooling import JustBalancePool
 
-from pooling_layers import JustBalancePool
-from dblp_dataset import DBLP
 from eval_metrics import eval_metrics
-from sklearn.metrics.cluster import normalized_mutual_info_score
-
 
 # Hyperparameters
 dataset_name = 'cora'
