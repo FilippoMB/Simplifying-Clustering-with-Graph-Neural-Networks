@@ -6,7 +6,9 @@ The official implementation of the [JustBalancePool](https://graphneural.network
 Run [``main.py``](https://github.com/FilippoMB/Simplifying-Clustering-with-Graph-Neural-Networks/blob/main/main.py) to perform node clustering.
 
 ### Pytorch
-[``just_balance_pyg.py``](https://github.com/FilippoMB/Simplifying-Clustering-with-Graph-Neural-Networks/blob/main/just_balance_pyg.py) provides a Pytorch implementation based [Pytorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/index.html#).
+[``just_balance_pyg.py``](https://github.com/FilippoMB/Simplifying-Clustering-with-Graph-Neural-Networks/blob/main/just_balance_pyg.py) provides a Pytorch implementation based [Pytorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/index.html#). Run [``main_pyg.py``](https://github.com/FilippoMB/Simplifying-Clustering-with-Graph-Neural-Networks/blob/main/main_pyg.py) to perform node clustering in Pytorch.
+
+**Note**: the Pytorch implementation has not beeen thoroughly tested. The results on the paper are based on the Tensorflow implementation.
 
 ## Citation
 
