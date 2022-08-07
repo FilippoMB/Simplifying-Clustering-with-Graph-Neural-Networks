@@ -12,7 +12,8 @@ from sklearn.metrics import normalized_mutual_info_score as NMI
 
 from just_balance_pyg import just_balance_pool
 
-torch.manual_seed(1) # for reproducibility
+torch.manual_seed(1) # for (inconsistent) reproducibility
+torch.cuda.manual_seed(1)
 
 # Load dataset
 dataset = 'cora'
