@@ -7,7 +7,8 @@ The JBGNN architecture consists of:
 
 $$ \mathbf{S} = \texttt{softmax} \left( \texttt{MLP} \left( \mathbf{\bar X}, \boldsymbol{\Theta}_\text{MLP} \right) \right) $$
 
->> where $\mathbf{\bar X}$ are the node features returned by a stack of GCN layers.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; where $\mathbf{\bar X}$ are the node features returned by a stack of GCN layers.
+
 Each pooling layer is associated with an unsupervised loss that balances the size of the clusters and prevents degenerate partitions
 
 $$\mathcal{L} = \text{Tr}\left( \sqrt{\mathbf{S}^T\mathbf{S} } \right).$$
