@@ -11,7 +11,7 @@ $$ \mathbf{S} = \texttt{softmax} \left( \texttt{MLP} \left( \mathbf{\bar X}, \bo
 
 Each pooling layer is associated with an unsupervised loss that balances the size of the clusters and prevents degenerate partitions
 
-$$\mathcal{L} = \text{Tr}\left( \sqrt{\mathbf{S}^T\mathbf{S} } \right).$$
+$$\mathcal{L} = - \text{Tr}\left( \sqrt{\mathbf{S}^T\mathbf{S} } \right).$$
 
 ## Clustering of graph vertices
 <img align="left" width="30" height="30" src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Tensorflow_logo.svg" alt="Tensorflow icon">
