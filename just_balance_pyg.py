@@ -23,16 +23,14 @@ def just_balance_pool(x, adj, s, mask=None, normalize=True):
         \mathcal{L} = - {\mathrm{Tr}(\sqrt{\mathbf{S}^{\top} \mathbf{S}})}
 
     Args:
-        x (Tensor): Node feature tensor :math:`\mathbf{X} \in \mathbb{R}^{B
-            \times N \times F}` with batch-size :math:`B`, (maximum)
-            number of nodes :math:`N` for each graph, and feature dimension
-            :math:`F`.
+        x (Tensor): Node feature tensor :math:`\mathbf{X} \in \mathbb{R}^{B \times N \times F}` 
+            with batch-size :math:`B`, (maximum) number of nodes :math:`N` 
+            for each graph, and feature dimension :math:`F`.
         adj (Tensor): Symmetrically normalized adjacency tensor
             :math:`\mathbf{A} \in \mathbb{R}^{B \times N \times N}`.
-        s (Tensor): Assignment tensor :math:`\mathbf{S} \in \mathbb{R}^{B
-            \times N \times C}` with number of clusters :math:`C`. The softmax
-            does not have to be applied beforehand, since it is executed
-            within this method.
+        s (Tensor): Assignment tensor :math:`\mathbf{S} \in \mathbb{R}^{B \times N \times C}` 
+            with number of clusters :math:`C`. The softmax does not have to be 
+            applied beforehand, since it is executed within this method.
         mask (BoolTensor, optional): Mask matrix
             :math:`\mathbf{M} \in {\{ 0, 1 \}}^{B \times N}` indicating
             the valid nodes for each graph. (default: :obj:`None`)
