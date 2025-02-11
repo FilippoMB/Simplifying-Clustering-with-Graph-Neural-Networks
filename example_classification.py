@@ -63,15 +63,6 @@ class Net(torch.nn.Module):
                 torch.nn.Linear(hidden_channels, hidden_channels),
             )
         )
-        # out_chan = hidden_channels
-        
-        # # MLP 
-        # self.mlp = torch.nn.Sequential()
-        # for units in mlp_units:
-        #     self.mlp.append(Linear(out_chan, units))
-        #     out_chan = units
-        #     self.mlp.append(mlp_act)
-        # self.mlp.append(Linear(out_chan, n_clusters))
         
         self.mlp = MLP([hidden_channels] + mlp_units + [n_clusters], act=mlp_act, norm=None)
         
