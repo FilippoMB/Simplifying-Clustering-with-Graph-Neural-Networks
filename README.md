@@ -1,3 +1,6 @@
+[![arXiv](https://img.shields.io/badge/arXiv-2207.08779-b31b1b.svg?)](https://arxiv.org/abs/2207.08779)
+[![poster](https://custom-icon-badges.demolab.com/badge/poster-pdf-orange.svg?logo=note&logoSource=feather&logoColor=white)](https://drive.google.com/file/d/1cXA0LTHcdTV8Q0-1cjabr7eayM7gKBbh/view?usp=share_link)
+
 Software implementation and code to reproduce the results of the *Just Balance GNN* (JBGNN) model for graph clustering as presented in the paper [Simplifying Clustering with Graph Neural Networks](https://arxiv.org/abs/2207.08779).
 
 The JBGNN architecture consists of:
@@ -13,7 +16,7 @@ Each pooling layer is associated with an unsupervised loss that balances the siz
 
 $$\mathcal{L} = - \text{Tr}\left( \sqrt{\mathbf{S}^T\mathbf{S} } \right).$$
 
-## Clustering of graph vertices
+## Node clustering and graph classification
 <img align="left" width="30" height="30" src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Tensorflow_logo.svg" alt="Tensorflow icon">
 
 ### Tensorflow
@@ -35,8 +38,6 @@ Run [``example_classification.py``](https://github.com/FilippoMB/Simplifying-Clu
 > The results on the paper were obtained using the Tensorflow/Spektral implementation.
 
 
-## Poster 
-The poster presentation of the paper *Simplifying Clustering with Graph Neural Networks* can be downloaded [here](https://drive.google.com/file/d/1cXA0LTHcdTV8Q0-1cjabr7eayM7gKBbh/view?usp=share_link).
 
 ## Citation
 
