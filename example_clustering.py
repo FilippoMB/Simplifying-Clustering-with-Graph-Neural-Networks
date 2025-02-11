@@ -1,16 +1,15 @@
 import os.path as osp
 import torch
-from torch.nn import Linear
 
 import torch_geometric.transforms as T
 from torch_geometric.datasets import Planetoid
-from torch_geometric.nn import GCNConv
+from torch_geometric.nn import GCNConv, Sequential
+from torch_geometric.nn.models.mlp import MLP
 from torch_geometric import utils
-from torch_geometric.nn import Sequential
 
 from sklearn.metrics import normalized_mutual_info_score as NMI
 
-from just_balance_pyg import just_balance_pool
+from just_balance import just_balance_pool
 
 torch.manual_seed(1) # for (inconsistent) reproducibility
 torch.cuda.manual_seed(1)
@@ -53,15 +52,8 @@ class Net(torch.nn.Module):
         self.mp = Sequential('x, edge_index, edge_weight', mp)
         out_chan = mp_units[-1]
         
-        # MLP layers
-        self.mlp = torch.nn.Sequential()
-        for units in mlp_units:
-            self.mlp.append(Linear(out_chan, units))
-            out_chan = units
-            self.mlp.append(mlp_act)
-        self.mlp.append(Linear(out_chan, n_clusters))
+        self.mlp = MLP([out_chan] + mlp_units + [n_clusters], act=mlp_act, norm=None)
         
-
     def forward(self, x, edge_index, edge_weight):
         
         # Propagate node feats
@@ -82,7 +74,6 @@ data = data.to(device)
 model = Net([64]*10, "ReLU", dataset.num_features, dataset.num_classes, [16], "ReLU").to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=1e-4)
 
-
 def train():
     model.train()
     optimizer.zero_grad()
@@ -91,14 +82,12 @@ def train():
     optimizer.step()
     return loss.item()
 
-
 @torch.no_grad()
 def test():
     model.eval()
     clust, _ = model(data.x, data.edge_index, data.edge_weight)
     return NMI(clust.max(1)[1].cpu(), data.y.cpu())
     
-
 for epoch in range(1, 1001):
     train_loss = train()
     nmi = test()

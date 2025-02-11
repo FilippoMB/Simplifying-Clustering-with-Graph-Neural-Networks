@@ -17,26 +17,35 @@ $$\mathcal{L} = - \text{Tr}\left( \sqrt{\mathbf{S}^T\mathbf{S} } \right).$$
 <img align="left" width="30" height="30" src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Tensorflow_logo.svg" alt="Tensorflow icon">
 
 ### Tensorflow
-The official implementation of the [JustBalancePool](https://graphneural.network/layers/pooling/#justbalancepool) layer is on [Spektral](https://graphneural.network/getting-started/), the Tensorflow/Keras library for Graph Neural Networks.
+A TF/Keras implementation of the [JustBalancePool](https://graphneural.network/layers/pooling/#justbalancepool) layer is on [Spektral](https://graphneural.network/getting-started/).
 
-Run [``main.py``](https://github.com/FilippoMB/Simplifying-Clustering-with-Graph-Neural-Networks/blob/main/main.py) to perform node clustering.
+Run [``example_clustering_tf.py``](https://github.com/FilippoMB/Simplifying-Clustering-with-Graph-Neural-Networks/blob/main/example_clustering_tf.py) to perform node clustering.
 
 <img align="left" width="30" height="30" src="https://upload.wikimedia.org/wikipedia/commons/1/10/PyTorch_logo_icon.svg" alt="Pytorch icon">
 
 ### Pytorch
-[``just_balance_pyg.py``](https://github.com/FilippoMB/Simplifying-Clustering-with-Graph-Neural-Networks/blob/main/just_balance_pyg.py) provides a Pytorch implementation based on [Pytorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/index.html#). Run [``main_pyg.py``](https://github.com/FilippoMB/Simplifying-Clustering-with-Graph-Neural-Networks/blob/main/main_pyg.py) to perform node clustering in Pytorch.
+[``just_balance.py``](https://github.com/FilippoMB/Simplifying-Clustering-with-Graph-Neural-Networks/blob/main/just_balance.py) provides a Pytorch implementation based on [Pytorch Geometric](https://pytorch-geometric.readthedocs.io/en/latest/index.html#). 
 
-**Note**: the results on the paper are based on the Tensorflow implementation.
+Run [``example_clustering.py``](https://github.com/FilippoMB/Simplifying-Clustering-with-Graph-Neural-Networks/blob/main/example_clustering.py) to perform node clustering in Pytorch.
+
+Run [``example_classification.py``](https://github.com/FilippoMB/Simplifying-Clustering-with-Graph-Neural-Networks/blob/main/example_classification.py) to perform graph classification in Pytorch.
+
+
+> [!IMPORTANT]  
+> The results on the paper were obtained using the Tensorflow/Spektral implementation.
+
 
 ## Poster 
 The poster presentation of the paper *Simplifying Clustering with Graph Neural Networks* can be downloaded [here](https://drive.google.com/file/d/1cXA0LTHcdTV8Q0-1cjabr7eayM7gKBbh/view?usp=share_link).
 
 ## Citation
 
-    @misc{bianchi2022simplifying,
-      doi = {10.48550/ARXIV.2207.08779},
-      author = {Bianchi, Filippo Maria},
-      title = {Simplifying Clustering with Graph Neural Networks},
-      publisher = {arXiv},
-      year = {2022},
-    }
+```bibtex
+@misc{bianchi2022simplifying,
+  doi = {10.48550/ARXIV.2207.08779},
+  author = {Bianchi, Filippo Maria},
+  title = {Simplifying Clustering with Graph Neural Networks},
+  publisher = {arXiv},
+  year = {2022},
+}
+```

@@ -65,7 +65,7 @@ def just_balance_pool(x, adj, s, mask=None, normalize=True):
     ind = torch.arange(k, device=out_adj.device)
     out_adj[:, ind, ind] = 0
     d = torch.einsum('ijk->ij', out_adj)
-    d = torch.sqrt(d)[:, None] + EPS
+    d = torch.sqrt(torch.clamp(d, min=EPS))[:, None]
     out_adj = (out_adj / d) / d.transpose(1, 2)
 
     return out, out_adj, loss
