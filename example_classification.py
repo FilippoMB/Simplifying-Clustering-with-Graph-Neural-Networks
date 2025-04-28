@@ -1,6 +1,5 @@
 import torch
 import torch.nn.functional as F
-from torch.nn import Linear
 from torch_geometric.nn import GINConv, DenseGINConv
 from torch_geometric.nn.models.mlp import MLP
 from torch_geometric.utils import to_dense_batch
